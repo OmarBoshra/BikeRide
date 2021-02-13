@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="BikeRide.UserControls.SideList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BikeRide.UserControls"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+ 
+        <ListBox Name="list_customers" Height="234" Width="190"
+                    
+				  VerticalAlignment="Top" IsTextSearchEnabled="True" Background="#FFB3C7F1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="White" HorizontalAlignment="Left"  >
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+				<Run Text= "{Binding userName}"/>
+				<LineBreak/>
+				<Run Text= "{Binding userPhone}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
+
+</UserControl>

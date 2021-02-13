@@ -1,0 +1,134 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeRide"
+        xmlns:Public_classes="clr-namespace:BikeRide.Public_classes" x:Class="BikeRide.RentConfirmation"
+        mc:Ignorable="d"
+        Title="RentConfirmation" Height="630" Width="800">
+    <Window.Resources>
+
+        <Public_classes:Brand2ImagePath x:Key="Brand2ImagePath"/>
+
+    </Window.Resources>
+    <Grid>
+
+
+
+        <ToolBar Width="800" VerticalAlignment="Top" Margin="0,0,-8,0" Height="68" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="Heading" VerticalAlignment="Top" Text="Rent Confimation" TextWrapping="Wrap" Margin="267.151,20,267.151,0" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <StackPanel Margin="80,134,72,123" Orientation="Vertical">
+            <TextBlock VerticalAlignment="Top" Text="Rent Details" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold"/>
+            <StackPanel Margin="0,20,0,0" Orientation="Vertical">
+                <TextBlock VerticalAlignment="Top" Text="Customer Details" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold"/>
+                <WrapPanel Margin="0,20,10,0" Orientation="Horizontal">
+                    <TextBlock x:Name="CustomerName" Width="99" Text="Name" FontSize="12"/>
+                    <TextBlock x:Name="TextBlock_CustomerName" Width="150" Text="" Height="20" HorizontalAlignment="Center" FontWeight="Bold"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,10,10,0" Orientation="Horizontal">
+                    <TextBlock x:Name="CustomerPhone" Width="99" Text="Phone" FontSize="12"/>
+                    <TextBlock x:Name="TextBlock_CustomerPhone" Width="150" Text="" Height="20" HorizontalAlignment="Center" FontWeight="Bold"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,10,10,0" Orientation="Horizontal">
+                    <TextBlock x:Name="CustomerEmail" Width="99" Text="Email" FontSize="12"/>
+                    <TextBlock x:Name="TextBlock_CustomerEmail" Width="150" Text="" Height="20" HorizontalAlignment="Center" FontWeight="Bold"/>
+                </WrapPanel>
+            </StackPanel>
+            <StackPanel Margin="0,20,-52,0" Orientation="Vertical">
+                <TextBlock VerticalAlignment="Top" Text="Bike Details" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold"/>
+                <WrapPanel Margin="0,20,404,0" Orientation="Horizontal">
+                    <TextBlock x:Name="BikeBrand" Width="99" Text="Brand" FontSize="12"/>
+                    <TextBlock x:Name="TextBlock_BikeBrand" Width="150"  Height="20" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding Brand}" DataContext="{Binding SelectedItem, ElementName=Lbx_Bikes}"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,10,404,0" Orientation="Horizontal">
+                    <TextBlock x:Name="BikeType" Width="99" Text="Type" FontSize="12"/>
+                    <TextBlock x:Name="TextBlock_BikeType" Width="150" Height="20" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding Type}" DataContext="{Binding SelectedItem, ElementName=Lbx_Bikes}"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,10,404,0" Orientation="Horizontal">
+                    <TextBlock x:Name="BikePrice" Width="99" Text="Price Per Hour" FontSize="12"/>
+                    <TextBlock x:Name="TextBlock_BikePrice" Width="150"  Height="20" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding PricePerHr}" DataContext="{Binding SelectedItem, ElementName=Lbx_Bikes}"/>
+                </WrapPanel>
+            </StackPanel>
+        </StackPanel>
+        <DockPanel Width="190" VerticalAlignment="Top" Margin="0,128,50,0" Height="190" HorizontalAlignment="Right">
+            <Border Width="190" Height="190" DockPanel.Dock="Top" CornerRadius="6" Background="#FFF5F5AA" BorderThickness="2" BorderBrush="Black">
+                <StackPanel Background="#FFF5F5AA" Margin="5">
+                    <TextBlock VerticalAlignment="Top" Text="Total Price" TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="15"/>
+                    <TextBlock x:Name="textBlock_totalPrice" VerticalAlignment="Top" Text="0 $ " TextWrapping="Wrap" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                    <TextBlock x:Name="textBlock_headerRentedDuration" VerticalAlignment="Top" Text="Rented Until" TextWrapping="Wrap" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="15" Background="{x:Null}"/>
+                    <ComboBox x:Name="cbx_rentTime" IsEditable="True" VerticalAlignment="Top" Text="00:00 AM" Margin="34,12,34,0" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Background="{x:Null}" Width="108" SelectionChanged="cbx_rentTime_SelectionChanged"
+                              >
+
+
+                        <ComboBoxItem Content="09:30 AM"/>
+                        <ComboBoxItem Content="10:00 AM"/>
+                        <ComboBoxItem Content="10:30 AM"/>
+                        <ComboBoxItem Content="11:00 AM"/>
+                        <ComboBoxItem Content="11:30 AM"/>
+                        <ComboBoxItem Content="12:00 PM"/>
+                        <ComboBoxItem Content="12:30 PM"/>
+                        <ComboBoxItem Content="01:00 PM"/>
+                        <ComboBoxItem Content="01:30 PM"/>
+                        <ComboBoxItem Content="02:00 PM"/>
+                        <ComboBoxItem Content="02:30 PM"/>
+                        <ComboBoxItem Content="03:00 PM"/>
+                        <ComboBoxItem Content="03:30 PM"/>
+                        <ComboBoxItem Content="04:00 PM"/>
+                        <ComboBoxItem Content="04:30 PM"/>
+                        <ComboBoxItem Content="05:00 PM"/>
+                        <ComboBoxItem Content="05:30 PM"/>
+                        <ComboBoxItem Content="06:00 PM"/>
+                        <ComboBoxItem Content="06:30 PM"/>
+                        <ComboBoxItem Content="07:00 PM"/>
+                        <ComboBoxItem Content="07:30 PM"/>
+                        <ComboBoxItem Content="08:00 PM"/>
+                        <ComboBoxItem Content="08:30 PM"/>
+                        <ComboBoxItem Content="09:00 PM"/>
+                        <ComboBoxItem Content="09:30 PM"/>
+                        <ComboBoxItem Content="10:00 PM"/>
+                        <ComboBoxItem Content="10:00 PM"/>
+
+
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+        <Button x:Name="button_submitPayment" Width="107" VerticalAlignment="Top" Margin="635,539,0,0" HorizontalAlignment="Left" Content="Submit Payment" Click="ButtonClick_ConfirmPayment"/>
+        <Image x:Name="image_customer" Width="70" Margin="386,178.5,326,310.5" Height="70"/>
+        <Image x:Name="image_bike" Width="70" Source="{Binding Text, Converter={StaticResource Brand2ImagePath}, ElementName=TextBlock_BikeBrand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="386,329.5,326,159.5" Height="70"/>
+
+        <ListBox x:Name="Lbx_Bikes" HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="480" Background="#FFFFF2CC" BorderBrush="White"  Margin="80,441,0,0" >
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" ItemWidth="190" ItemHeight="80" Width="{Binding ActualWidth, ElementName=Lbx_Bikes}"/>
+
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Top">
+                        <Image x:Name="bikeImage" Margin ="0,0,4,0" Width="40" Height="40" Source= "{Binding Brand , Converter={StaticResource Brand2ImagePath}}"/>
+                        <TextBlock>
+				<Run Text= "{Binding Brand}" FontWeight="Bold"/>
+				<LineBreak/>
+				<Run Text= "{Binding Type}" FontWeight="Bold"/><LineBreak/>
+                                
+                <Run Text= "{Binding PricePerHr}" FontWeight="Bold"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock x:Name="BikeDetails" Text="Details" Width="99" FontSize="12" HorizontalAlignment="Left" Margin="493,356,0,197" />
+        <TextBlock x:Name="textBlock_BikeDetails" FontWeight="Bold" TextWrapping="Wrap"
+      Text ="{Binding Details}"
+      DataContext = "{Binding SelectedItem, ElementName=Lbx_Bikes}" 
+                             Margin="592,356,50,123" 
+                             />
+
+
+
+    </Grid>
+</Window>

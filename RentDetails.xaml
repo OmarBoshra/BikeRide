@@ -1,0 +1,305 @@
+﻿<Window x:Class="BikeRide.RentDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeRide"
+        xmlns:converters="clr-namespace:BikeRide.Public_classes"
+
+
+        Loaded="Window_Loaded"
+        mc:Ignorable="d"
+        Title="RentDetails" Height="680" Width="810">
+    <Window.Resources>
+
+
+        <converters:Brand2ImagePath x:Key="Brand2ImagePath"/>
+
+    </Window.Resources>
+    <Grid>
+
+
+
+
+
+        <ToolBar HorizontalAlignment="Left" Height="68" VerticalAlignment="Top" Width="800">
+
+            <Image Source="bikelogo.png" HorizontalAlignment="Right" Margin="700,5,5,5"  />
+        </ToolBar>
+
+        <TextBlock x:Name="Heading" Margin="20" Text = "Rent Bike" FontSize="20" FontWeight="Bold"   HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" />
+
+
+        <TabControl Margin="264,118,268,340" Padding="5" Background="Snow">
+
+
+            <TabItem Header="Customer" >
+
+                <StackPanel  Orientation="Vertical">
+
+
+                    <TextBlock x:Name="Customer_Details" Text = "Customer Details" FontSize="14" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <StackPanel  Orientation="Horizontal" 
+                Margin="0,20,-23,0" >
+
+                        <TextBlock Text="Name" Width="99" FontSize="12" />
+
+
+                        <TextBlock x:Name="TextBlock_Name" Text ="{Binding Name}"
+                    DataContext = "{Binding SelectedItem, ElementName=listBox_customers}" HorizontalAlignment="Center" Width="150" FontWeight="Bold" Height="20" />
+
+                    </StackPanel>
+
+
+                    <StackPanel  Orientation="Horizontal" 
+                Margin="0,15,0,0" MinHeight="20" >
+
+                        <TextBlock x:Name="Phone" Text="Phone" Width="99" FontSize="12" VerticalAlignment="Bottom"/>
+
+                        <TextBlock x:Name="TextBlock_PhoneNumber" FontWeight="Bold"   Width="150" Height="20" 
+                    Text ="{Binding Phone}"
+                    DataContext = "{Binding SelectedItem, ElementName=listBox_customers}" 
+                             />
+
+                    </StackPanel>
+
+
+                    <StackPanel  Orientation="Horizontal" 
+                Margin="0,15,0,0" MinHeight="20" >
+
+                        <TextBlock x:Name="Email" Text="Email" Width="99" FontSize="12" VerticalAlignment="Bottom"/>
+
+                        <TextBlock x:Name="TextBlock_email" FontWeight="Bold"   Width="150" Height="20" 
+                    Text ="{Binding Email}"
+                    DataContext = "{Binding SelectedItem, ElementName=listBox_customers}" 
+                             />
+
+                    </StackPanel>
+
+
+
+
+                </StackPanel>
+
+
+            </TabItem>
+
+            <TabItem Header="New Customer" >
+
+
+                <StackPanel  Orientation="Vertical">
+
+
+                    <TextBlock x:Name="New_Customer" Text = "New Customer" FontSize="14" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,5,0,0" />
+                    <StackPanel  Orientation="Horizontal" 
+                Margin="0,20,6,0" >
+
+                        <TextBlock Text="Name" Width="100" FontSize="12" />
+                        <TextBox x:Name="TextBox_NewName" Text ="" HorizontalAlignment="Right" Width="142" FontWeight="Bold" Height="20" />
+
+                    </StackPanel>
+
+
+                    <StackPanel  Orientation="Horizontal" 
+                Margin="0,15,0,0" MinHeight="20" >
+
+                        <TextBlock x:Name="NewPhone" Text="Phone" Width="100" FontSize="12" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="TextBox_NewPhoneNumber" FontWeight="Bold"   Width="142" Height="20" 
+                    Text ="" PreviewTextInput="TextBox_NewPhoneNumber_PreviewTextInput"
+                             />
+
+                    </StackPanel>
+
+
+                    <StackPanel  Orientation="Horizontal" 
+                Margin="0,15,0,0" MinHeight="20" >
+
+                        <TextBlock x:Name="NewEmail" Text="Email" Width="100" FontSize="12" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="Textbox_Newemail" FontWeight="Bold"   Width="142" Height="20" 
+                    Text ="" 
+                             />
+
+                    </StackPanel>
+
+
+
+
+                </StackPanel>
+
+
+            </TabItem>
+
+        </TabControl>
+
+
+        <StackPanel x:Name="Customer_list"  Orientation="Vertical" Margin="36,116,0,52" MaxWidth="190" HorizontalAlignment="Left" Width="190" >
+
+
+
+            <TextBlock x:Name="List_Heading" Text = "Customers" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Width="{Binding ActualWidth, ElementName=Customer_list}" Background="#FF5D81CB" Height="20" Padding="10,2,5,0" Foreground="White" />
+
+
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Height="20"  Width="{Binding ActualWidth, ElementName=Customer_list}" >
+
+
+                <TextBox x:Name="List_SearchFilter" FontWeight="Bold"  TextChanged="TextBox_TextChanged"  Opacity="0.2" Width="90" ToolTip="Search for Customer" >
+
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource SearchHint}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+
+                    <TextBox.Effect>
+                        <DropShadowEffect Color="#FFFFFBAB" BlurRadius="1"/>
+                    </TextBox.Effect>
+                </TextBox>
+
+                <ComboBox
+                    x:Name="Cbx_FilterBy" Margin="0,0,0,-2"  
+                    SelectedIndex="0"
+                    ToolTip="Filter Customer Information"
+                    BorderBrush="White" SelectionChanged="Cbx_FilterBy_SelectionChanged" Text="FilterBy"  HorizontalAlignment="Stretch" MaxWidth="99" Width="99" Height="22" VerticalAlignment="Top" >
+
+                    <ComboBoxItem Content="Name"/>
+                    <ComboBoxItem Content="Phone number"/>
+                    <ComboBoxItem Content="E-mail"/>
+
+                </ComboBox>
+
+            </StackPanel>
+
+            <ListBox x:Name="listBox_customers" Height="352" Width="190"
+                 ItemTemplate ="{StaticResource CustomerTemplate}"
+                VerticalAlignment = "Top" IsTextSearchEnabled="True" Background="#FFB3C7F1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="White" HorizontalAlignment="Left" SelectionChanged="listBox_customers_SelectionChanged"  />
+
+
+
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Height="20" HorizontalAlignment="Left"  Width="{Binding ActualWidth, ElementName=Customer_list}" />
+
+        </StackPanel>
+
+
+
+
+        <StackPanel Margin="264,316,108,115" Orientation="Vertical">
+            <TextBlock x:Name="TextBlock_BikesHeader" Text = "Bikes" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top"  Width="408" Background="#FFF7ECC5" Height="19" Padding="5,0,0,0"  />
+
+            <StackPanel Margin="2,0,10,0" Orientation="Horizontal" Height="20" >
+
+
+                <TextBox x:Name="List_SearchFilterBikes" FontWeight="Bold"  TextChanged="TextBox_TextChangedBikes"  Opacity="0.2" Width="316"  ToolTip="Search for Bike">
+
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource SearchHint}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+
+                    <TextBox.Effect>
+                        <DropShadowEffect Color="#FFFFFBAB" BlurRadius="1"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <ComboBox
+                    x:Name="Cbx_FilterBikesBy" Margin="0,0,0,-2"  
+                 SelectedIndex="0"
+                    ToolTip="Filter Bike information"
+                    BorderBrush="White" SelectionChanged="Cbx_BikesFilterBy_SelectionChanged" Text="FilterBy"  HorizontalAlignment="Stretch" MaxWidth="99" Width="90">
+
+                    <ComboBoxItem Content="Brand"/>
+                    <ComboBoxItem Content="Type"/>
+                    <ComboBoxItem Content="PricePerHr"/>
+
+                </ComboBox>
+
+            </StackPanel>
+
+
+
+            <ListBox x:Name="Lbx_Bikes" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="410" Background="#FFFFF2CC" BorderBrush="White"  >
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" ItemWidth="190" ItemHeight="80" Width="{Binding ActualWidth, ElementName=Lbx_rentedBikes}"/>
+
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Top">
+                            <Image x:Name="bikeImage" Margin ="0,0,4,0" Width="40" Height="40" Source= "{Binding Brand , Converter={StaticResource Brand2ImagePath}}"/>
+                            <TextBlock>
+				<Run Text= "{Binding Brand}" FontWeight="Bold"/>
+				<LineBreak/>
+				<Run Text= "{Binding Type}" FontWeight="Bold"/><LineBreak/>
+                                
+                <Run Text= "{Binding PricePerHr}" FontWeight="Bold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </StackPanel>
+
+
+
+
+        <StackPanel Margin="264,479,43,-41" Orientation="Vertical">
+            <TextBlock x:Name="TextBlock_RentedBikesHeader" Text = "Rented Bikes" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top"  Width="479" Background="#FFF7ECC5" Height="14" Padding="5,0,0,0"  />
+            <ListBox x:Name="Lbx_rentedBikes" HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="480" Background="#FFFFF2CC" BorderBrush="White" SelectionChanged="Lbx_rentedBikes_SelectionChanged" >
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" ItemWidth="190" ItemHeight="80" Width="{Binding ActualWidth, ElementName=Lbx_rentedBikes}"/>
+
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Top">
+                            <Image x:Name="bikeImage" Margin ="0,0,4,0" Width="40" Height="40" Source= "{Binding Brand, Converter={StaticResource Brand2ImagePath}}"/>
+
+                            <TextBlock><!--<Run Text= "{Binding Id , Converter={StaticResource Id2Brand} }"  FontWeight="Bold"/>--><Run Text= "Brand"/><LineBreak/><Run Text= "{Binding Brand}" FontWeight="Bold"/><LineBreak/><Run Text= "Date"/><LineBreak/><Run Text= "{Binding Date}" FontWeight="Bold"/></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </StackPanel>
+
+
+        <Button Content="Return Bike" HorizontalAlignment="Left" Margin="550,123,0,0" VerticalAlignment="Top" Width="107" Click="Confirm_Bike"/>
+        <Button Content="Rent Bike(s)" HorizontalAlignment="Left" Margin="675,123,0,0" VerticalAlignment="Top" Width="107" Click="Button_Click_RentBike" />
+        <Button Content="Add Bike" HorizontalAlignment="Left" Margin="684,316,0,0" VerticalAlignment="Top" Width="65" Click="AddBike" Height="23"/>
+        <Grid x:Name="Grd_Menue" HorizontalAlignment="Left" Height="451" Margin="5,0,0,-22" Grid.Row="2" VerticalAlignment="Top" Width="16" Background="AliceBlue" MouseEnter="Grd_Menue_MouseEnter" MouseLeave="Grd_Menue_MouseLeave" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+
+            <Image Source="back.png"/>
+
+            <Button x:Name="Rent" Content="Rent" HorizontalAlignment="Right" Margin="-122,139,28,0" VerticalAlignment="Top" Width="110" Height="28" FontSize="14" FontWeight="DemiBold"  Grid.Row="1"/>
+
+            <Button Content="Rent Status" HorizontalAlignment="Right" Margin="-122,21,28,332" Width="110" FontSize="14" FontWeight="DemiBold"  Click="Button_Click_RentStatus" Grid.Row="1" />
+
+            <Button x:Name="Customer" Content="Customer Info" HorizontalAlignment="Right" Margin="-122,79,28,0" VerticalAlignment="Top" Width="110" Height="28" FontSize="14" FontWeight="DemiBold"  Grid.Row="1" Click="Customer_Click" />
+
+        </Grid>
+        <Button Content="Add Customer" HorizontalAlignment="Left" Margin="128,514,0,0" VerticalAlignment="Top" Width="98" Click="createCustomer" Height="23"/>
+        <Image x:Name="customer_image" HorizontalAlignment="Left" Height="100"   Width="100"   DataContext = "{Binding SelectedItem, ElementName=list_customers}" Source= "{Binding ImagePath}" Margin="543,176,0,373"/>
+
+
+    </Grid>
+</Window>

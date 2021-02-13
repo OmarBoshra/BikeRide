@@ -1,0 +1,170 @@
+﻿<Page x:Class="BikeRide.Pages.SubmittingCustomerPayment.BikeConfirmation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BikeRide"
+      xmlns:converters="clr-namespace:BikeRide.Public_classes"
+      mc:Ignorable="d" 
+     Height="580" Width="800"
+      
+      Loaded="Page_Loaded"
+      Title="BikeConfirmation">
+
+    <Page.Resources>
+        <converters:Brand2ImagePath x:Key="Brand2ImagePath"/>
+        
+    </Page.Resources>
+    
+    <Grid>
+        <StackPanel Margin="282,134,164,13" Orientation="Vertical">
+
+
+            <TextBlock x:Name="Bike_Details" Text = "Bike Details" FontSize="14" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,5,0,10" />
+            <StackPanel  Orientation="Horizontal" 
+                         Margin="0,20,-23,0" >
+
+                <TextBlock x:Name="BikeBrand" Text="Brand" Width="99" FontSize="12" />
+
+
+                <TextBlock x:Name="TextBlock_BikeBrand" Text ="{Binding Brand}"
+                         DataContext = "{Binding SelectedItem, ElementName=listBox_bikes}" HorizontalAlignment="Center" Width="150" FontWeight="Bold" Height="20" />
+
+            </StackPanel>
+
+
+            <StackPanel  Orientation="Horizontal" 
+                          Margin="0,10,0,0" MinHeight="20" >
+
+                <TextBlock x:Name="BikeType" Text="Type" Width="99" FontSize="12" VerticalAlignment="Bottom"/>
+
+                <TextBlock x:Name="textBlock_BikeType" FontWeight="Bold"   Width="150" Height="20" 
+                             Text ="{Binding Type}"
+                         DataContext = "{Binding SelectedItem, ElementName=listBox_bikes}" 
+                             />
+
+            </StackPanel>
+
+
+            <StackPanel  Orientation="Horizontal" 
+                          Margin="0,10,0,0" MinHeight="20" >
+
+                <TextBlock x:Name="BikePrice" Text="Price" Width="99" FontSize="12" VerticalAlignment="Bottom"/>
+
+                <TextBlock x:Name="textBlock_BikePrice" FontWeight="Bold"   Width="150" Height="20" 
+                             Text ="{Binding PricePerHr}"
+                         DataContext = "{Binding SelectedItem, ElementName=listBox_bikes}" 
+                             />
+
+            </StackPanel>
+
+            <WrapPanel  Orientation="Horizontal" 
+                          Margin="0,10,0,0" MinHeight="20" >
+
+
+                <TextBlock x:Name="BikeDetails" Text="Details" Width="99" FontSize="12" HorizontalAlignment="Left" />
+
+                <TextBlock x:Name="textBlock_BikeDetails" FontWeight="Bold" TextWrapping="Wrap"   Width="150"
+                             Text ="{Binding Details}"
+                         DataContext = "{Binding SelectedItem, ElementName=listBox_bikes}" 
+                             />
+
+            </WrapPanel>
+
+
+
+
+        </StackPanel>
+
+        <StackPanel x:Name="Customer_list"  Orientation="Vertical" Margin="36,134,0,152" MaxWidth="190" HorizontalAlignment="Left" Width="190" Height="294" >
+
+
+
+            <TextBlock x:Name="List_Heading" Text = "Bikes" FontWeight="Bold"   HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Width="{Binding ActualWidth, ElementName=Customer_list}" Background="#FF5D81CB" Height="20" Padding="10,2,5,0" Foreground="White" />
+
+
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" Height="20"  Width="{Binding ActualWidth, ElementName=Customer_list}" >
+
+
+                <TextBox x:Name="List_SearchFilter" FontWeight="Bold"  TextChanged="TextBox_TextChanged"  Opacity="0.2" Width="90"  ToolTip="Search for Bike">
+
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource SearchHint}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+
+                    <TextBox.Effect>
+                        <DropShadowEffect Color="#FFFFFBAB" BlurRadius="1"/>
+                    </TextBox.Effect>
+                </TextBox>
+
+                <ComboBox
+                    x:Name="Cbx_FilterBy" Margin="0,0,0,-2"  
+                 SelectedIndex="0"
+                    ToolTip="Filter Bike information"
+                    BorderBrush="White" SelectionChanged="Cbx_FilterBy_SelectionChanged" Text="FilterBy"  HorizontalAlignment="Stretch" MaxWidth="99" Width="99">
+
+                    <ComboBoxItem>Brand</ComboBoxItem>
+                    <ComboBoxItem>Type</ComboBoxItem>
+                    <ComboBoxItem>PricePerHr</ComboBoxItem>
+
+                </ComboBox>
+
+            </StackPanel>
+
+            <ListBox x:Name="listBox_bikes" Height="234" Width="190"
+                    
+				  VerticalAlignment="Top" IsTextSearchEnabled="True" Background="#FFB3C7F1" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" BorderBrush="White" HorizontalAlignment="Left"  >
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+
+                        
+                        <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Top">
+
+
+                            <Image x:Name="studentImage" Margin ="0,0,4,0" Width="40" Height="40" Source= "{Binding Brand , Converter={StaticResource Brand2ImagePath}}"/>
+                            
+                            <TextBlock>
+				<Run Text= "{Binding Brand}" FontWeight="Bold"/>
+				<LineBreak/>
+				<Run Text= "{Binding Type}" FontWeight="Bold"/><LineBreak/>
+                                
+                <Run Text= "{Binding PricePerHr}" FontWeight="Bold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+
+            </ListBox>
+
+        </StackPanel>
+
+        <Button HorizontalAlignment="Left" Margin="159,5,0,0" VerticalAlignment="Top" Width="40" Background="Transparent" BorderBrush="Transparent" Click="Back2DashBoard"  Height="40" >
+            <Viewbox  Width="35" Height="35">
+                <Path Data="{StaticResource Up}" Fill="{StaticResource BlueBrush}" />
+            </Viewbox>
+        </Button>
+
+        <Button HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Width="40" Background="Transparent" BorderBrush="Transparent" Click="Back2Customers"  Height="40" >
+            <Viewbox  Width="35" Height="35" RenderTransformOrigin="0.5,0.6">
+                <Path Data="{StaticResource Back}" Fill="{StaticResource BlueBrush}" />
+            </Viewbox>
+        </Button>
+
+        <Button Content="Confirm Bike" HorizontalAlignment="Left" Margin="633,454,0,0" VerticalAlignment="Top" Width="107" Click="Confirm_Bike"/>
+
+        <Image x:Name="bike_image" HorizontalAlignment="Left" Height="100" Margin="581,138,0,0" 
+          
+               VerticalAlignment="Top" Width="100"   DataContext = "{Binding SelectedItem, ElementName=listBox_bikes}" Source= "{Binding Brand , Converter={StaticResource Brand2ImagePath}}"/>
+
+
+    </Grid>
+</Page>

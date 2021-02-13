@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BikeRide.ResourceDictionaries">
+
+
+    <Color x:Key="Blue" R="0x00" G="0x8C" B="0xFF" A="0xFF" />
+
+</ResourceDictionary>
